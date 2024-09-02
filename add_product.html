@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>upload page</title>
+<link rel="shortcut icon" href="#"/>
+<script src="statics/js/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/png" href="design/Login_v13/images/icons/favicon.ico"/>
+<link rel="stylesheet" type="text/css" href="design/Login_v13/vendor/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="design/Login_v13/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="design/Login_v13/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+<link rel="stylesheet" type="text/css" href="design/Login_v13/fonts/iconic/css/material-design-iconic-font.min.css">
+<link rel="stylesheet" type="text/css" href="design/Login_v13/vendor/animate/animate.css">
+<link rel="stylesheet" type="text/css" href="design/Login_v13/vendor/css-hamburgers/hamburgers.min.css">
+<link rel="stylesheet" type="text/css" href="design/Login_v13/vendor/animsition/css/animsition.min.css">
+<link rel="stylesheet" type="text/css" href="design/Login_v13/vendor/select2/select2.min.css">
+<link rel="stylesheet" type="text/css" href="design/Login_v13/vendor/daterangepicker/daterangepicker.css">
+<link rel="stylesheet" type="text/css" href="design/Login_v13/css/util.css">
+<link rel="stylesheet" type="text/css" href="design/Login_v13/css/main.css">
+
+</head>
+
+<body style="background-color: #999999;">
+	
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="login100-more" style="background-image: url('design/Login_v13/images/upload.png');"></div>
+
+			<div class="wrap-login100 p-l-50 p-r-50 p-t-72 p-b-50">
+				<form class="login100-form validate-form">
+					<span class="login100-form-title p-b-59">
+						STEPS 2/2
+					</span>
+
+					<div class="wrap-input100 validate-input" data-validate="Name is required">
+						<span class="label-input100">Name</span>
+						<input class="input100" type="email" name="name" placeholder="Name..." id="name" required>
+						<span class="focus-input100"></span>
+					</div>
+
+					<div class="wrap-input100 validate-input" >
+						<span class="label-input100">Price</span>
+						<input class="input100" type="password" name="pass" placeholder="$$$$$$$$" id="price" required>
+						<span class="focus-input100"></span>
+					</div>
+
+					<div class="wrap-input100 validate-input" >
+						<span class="label-input100">Deadline</span>
+						<input class="input100" type="password" name="pass" placeholder="time..." id="deadline" required>
+						<span class="focus-input100"></span>
+					</div>
+					
+					<div class="wrap-input100 validate-input" >
+						<span class="label-input100">Describe</span>
+						<input class="input100" type="password" name="pass" placeholder="give some words" id="describe" required>
+						<span class="focus-input100"></span>
+					</div>
+					<div class="wrap-input100 validate-input">
+					<span class="label-input100">Category</span>
+					<select name="category" id="category">
+						<option value=1>WATCH</option>
+						<option value=2>ART</option>
+						<option value=3>ANTIQUE</option>
+						<option value=4>OTHERS</option>			
+					</select>
+					<span class="focus-input100"></span>
+					<div/>
+					
+					<div class="container-login100-form-btn">
+						<div class="wrap-login100-form-btn">
+							<div class="login100-form-bgbtn"></div>
+							<button id="submit" class="login100-form-btn">
+								ADD PRODUCT
+							</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	
+<!--===============================================================================================-->
+	<script src="design/Login_v13/vendor/jquery/jquery-3.2.1.min.js"></script>
+	<script src="design/Login_v13/vendor/animsition/js/animsition.min.js"></script>
+	<script src="design/Login_v13/vendor/bootstrap/js/popper.js"></script>
+	<script src="design/Login_v13/vendor/bootstrap/js/bootstrap.min.js"></script>
+	<script src="design/Login_v13/vendor/select2/select2.min.js"></script>
+	<script src="design/Login_v13/vendor/daterangepicker/moment.min.js"></script>
+	<script src="design/Login_v13/vendor/daterangepicker/daterangepicker.js"></script>
+	<script src="design/Login_v13/vendor/countdowntime/countdowntime.js"></script>
+	<script src="design/Login_v13/js/main.js"></script>
+	
+	<script type="text/javascript">
+		
+		var seller = localStorage.getItem("member_id");
+		var url_string = window.location.href;
+		var url = new URL(url_string);
+		var image = url.searchParams.get("image");
+		//var category2 = selectPress.option[selectPress.selectedIndex].innerText;
+		
+					$(document).ready(function() {
+                    // 處理表單點擊事件
+                    var $form = $('#submit');
+                    $form.click(function() {
+                    	//var category2 = document.getElementById("category").value;
+                        submit();
+                        //alert(category2);
+                    });
+                    
+                    function submit() {
+                        var name = $('#name').val();
+                        var price = $('#price').val();
+                        var deadline = $('#deadline').val();
+                        var category = $('#category').val();
+                        console.log(category);
+                        
+                        var describe = $('#describe').val();
+                        const fun = 3;//fun=1 getall fun=2 getone fun=3 add one
+						var id = localStorage.getItem("temp");
+                            // 將資料組成JSON格式
+                            var data_object = {
+                                "id":id,
+                        		"seller":seller,
+                        		"name": name,
+                                "price": price,
+                                "deadline": deadline,
+                                "category":category,
+                                "describe":describe,
+                                "function":fun,
+                                "image":image
+                            };
+
+                            // 將JSON格式轉換成字串
+                            var data_string = JSON.stringify(data_object);
+
+                            // 發出POST的AJAX請求
+                            $.ajax({
+                                    type: "POST",
+                                    url: "api/product2.do",
+                                    data: data_string,
+                                    crossDomain: true,
+                                    cache: false,
+                                    dataType: 'json',
+                                    timeout: 5000,
+                                    success: function (response) {
+                                        if(response.status == 200){
+                                            //updateSQLTable(response.response);
+                                    		localStorage.setItem("temp",(parseInt(id)+1).toString());
+                                            window.location.href = "home.html";
+                                      		
+                                        }
+                                    },
+                                    error: function (e) {
+                                    	console.log(e);
+                                    	alert("無法連線到伺服器！");
+                                        
+                                    }
+                            });
+                    }
+                    
+                })
+    </script>         
+                   
+</body>
+</html>

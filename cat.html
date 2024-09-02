@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+  <meta name="generator" content="Jekyll v3.8.5">
+
+  <title>category</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="statics/css/bootstrap.min.css" rel="stylesheet">
+  <link href="statics/icon/favicon.ico" type="image/x-icon" rel="icon">
+  <link href="statics/icon/favicon.ico" type="image/x-icon" rel="shortcut icon">
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<!--[if lte IE 8]><script src="js/html5shiv.js"></script><![endif]-->
+	<script src="design/templated-ion/js/jquery.min.js"></script>
+	<script src="design/templated-ion/js/skel.min.js"></script>
+	<script src="design/templated-ion/js/skel-layers.min.js"></script>
+	<script src="design/templated-ion/js/init.js"></script>
+
+	<link rel="stylesheet" href="design/templated-ion/css/skel.css" />
+	<link rel="stylesheet" href="design/templated-ion/css/style.css" />
+	<link rel="stylesheet" href="design/templated-ion/css/style-xlarge.css" />
+
+  	</style>
+  	<link href="statics/css/product.css" rel="stylesheet">
+  	<script src="statics/js/jquery-3.4.1.min.js"></script>
+</head>
+
+<body id="top">
+
+		<!-- Header -->
+			<header id="header" class="skel-layers-fixed">
+				<h1><a href="home.html">CMI EST2020</a></h1>
+				<nav id="nav">
+					<ul>
+						<li><a href="follow.html">Following</a></li>
+						<li><a href="sell.html">My Market</a></li>
+						<li><a href="own.html">Bidding</a></li>
+						
+						<li><select name="category" id="category" onchange="javascript:location.href=this.value;">
+							<option>Category</option>
+							<option value="cat.html?category=1">WATCH</option>
+							<option value="cat.html?category=2">ART</option>
+							<option value="cat.html?category=3">ANTIQUE</option>
+							<option value="cat.html?category=4">OTHERS</option>			
+							</select></li>
+						<li><a href="login.html" class="button special">Logout</a></li>
+					</ul>
+				</nav>
+			</header>
+
+		<!-- Banner -->
+			<section id="banner">
+				<div class="inner">
+					<h2>Welcome to CMI</h2>
+					<p>Contemporary Modern Impressionist</p>
+					<ul class="actions">
+						<li><a href="index.jsp" class="button big alt">SELL</a></li>
+						<li><a href="edit_member.html" class="button big alt">EDIT</a></li>
+					</ul>
+				</div>
+			</section> 	
+			
+		<!-- Two -->
+			<section id="two" class="wrapper style2">
+				<div class="container">
+					<div class="row"  id="product_panel">
+					</div>
+				</div>
+			</section>
+	<script>   
+   
+	
+    function getAllProduct() {
+    	var url_string = window.location.href;
+		var url = new URL(url_string);
+		var category = url.searchParams.get("category");
+    	
+    	
+      var fun = 8;//fun=1 getallproduct fun=2 getoneproduct
+      var data_object = {
+      	"function": fun,
+      	"category": category
+      	
+      };
+              // 將JSON格式轉換成字串
+      var data_string = JSON.stringify(data_object);
+      $.ajax({
+        type: "POST",
+        url: "api/product2.do",
+        data: data_string,
+        crossDomain: true,
+        cache: false,
+        dataType: 'json',
+        timeout: 5000,
+        success: function (response) {
+          if (response.status == 200) {
+        	var product_panel = '';
+        	
+        	$.each(response.response.data, function (){
+        		product_panel += addProduct(this);
+        	})
+        	
+        	$("#product_panel").append(product_panel);
+          }
+        },
+        error: function () {
+          alert("無法連線到伺服器！");
+        }
+      });
+    }
+
+    getAllProduct();
+    
+    function addProduct(data) {
+    	let inner_html = '';
+ 		inner_html +='<div class="6u">';
+ 		inner_html +='<section class="special">';
+ 		inner_html += '<a href="product2.html?product_id='+data.id+'" class="image fit"><img src="statics/img/product2/' + data.image + '" alt="" /></a>';
+ 		inner_html += '<h3>'+ data.name +'</h3>';
+ 		inner_html += '<p>'+ data.price +'</p>';
+ 		inner_html += '<p>'+ data.deadline +'</p>';
+ 		inner_html += '<ul class="actions">';
+ 		inner_html += '<li><a href="product2.html?product_id='+data.id+'" class="button alt">詳細資訊</a></li>';
+ 		inner_html += '</ul>';
+ 		inner_html += '</section>';
+ 		inner_html += '</div>';
+		    	
+		return inner_html;
+    }
+    
+    
+  </script>
+</body>
+</html>

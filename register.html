@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+<link rel="stylesheet" type="text/css" href="design/Login_v13/vendor/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="design/Login_v13/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="design/Login_v13/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+<link rel="stylesheet" type="text/css" href="design/Login_v13/fonts/iconic/css/material-design-iconic-font.min.css">
+<link rel="stylesheet" type="text/css" href="design/Login_v13/vendor/animate/animate.css">
+<link rel="stylesheet" type="text/css" href="design/Login_v13/vendor/css-hamburgers/hamburgers.min.css">
+<link rel="stylesheet" type="text/css" href="design/Login_v13/vendor/animsition/css/animsition.min.css">
+<link rel="stylesheet" type="text/css" href="design/Login_v13/vendor/select2/select2.min.css">
+<link rel="stylesheet" type="text/css" href="design/Login_v13/vendor/daterangepicker/daterangepicker.css">
+<link rel="stylesheet" type="text/css" href="design/Login_v13/css/util.css">
+<link rel="stylesheet" type="text/css" href="design/Login_v13/css/main.css">
+<title>register page</title>
+<link rel="shortcut icon" href="#"/>
+<script src="statics/js/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+</head>
+
+<body style="background-color: #999999;">
+	
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="login100-more" style="background-image: url('design/Login_v13/images/bg-02.jpg');"></div>
+
+			<div class="wrap-login100 p-l-50 p-r-50 p-t-72 p-b-50">
+				<form class="login100-form validate-form">
+					<span class="login100-form-title p-b-59">
+						Sign Up
+					</span>
+
+					<div class="wrap-input100 validate-input" data-validate="Name is required">
+						<span class="label-input100">Full Name</span>
+						<input class="input100" type="text" name="name" placeholder="Name..." id="username" required>
+						<span class="focus-input100"></span>
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+						<span class="label-input100">Email</span>
+						<input class="input100" type="email" name="email" placeholder="Email addess..." id="email2" required>
+						<span class="focus-input100"></span>
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate="Username is required">
+						<span class="label-input100">Address</span>
+						<input class="input100" type="text" name="username" placeholder="Address..." id="address" required>
+						<span class="focus-input100"></span>
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate = "Password is required">
+						<span class="label-input100">Password</span>
+						<input class="input100" type="password" name="pass" placeholder="*************" id="password2" required>
+						<span class="focus-input100"></span>
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate = "Repeat Password is required">
+						<span class="label-input100">Phone</span>
+						<input class="input100" type="text" name="Phone" placeholder="Phone number..." id="phone" required>
+						<span class="focus-input100"></span>
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate = "Repeat Password is required">
+						<span class="label-input100">Account</span>
+						<input class="input100" type="text" name="Account" placeholder="Bank Account..." id="account" required>
+						<span class="focus-input100"></span>
+					</div>
+
+
+					<div class="container-login100-form-btn">
+						<div class="wrap-login100-form-btn">
+							<div class="login100-form-bgbtn"></div>
+							<button id="submit" class="login100-form-btn">
+								Sign Up
+							</button>
+						</div>
+
+						<a href="login.html" class="dis-block txt3 hov1 p-r-30 p-t-10 p-b-10 p-l-30">
+							Sign in
+							<i class="fa fa-long-arrow-right m-l-5"></i>
+						</a>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	
+<!--===============================================================================================-->
+	<script src="design/Login_v13/vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="design/Login_v13/vendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+	<script src="design/Login_v13/vendor/bootstrap/js/popper.js"></script>
+	<script src="design/Login_v13/vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="design/Login_v13/vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+	<script src="design/Login_v13/vendor/daterangepicker/moment.min.js"></script>
+	<script src="design/Login_v13/vendor/daterangepicker/daterangepicker.js"></script>
+<!--===============================================================================================-->
+	<script src="design/Login_v13/vendor/countdowntime/countdowntime.js"></script>
+<!--===============================================================================================-->
+	<script src="design/Login_v13/js/main.js"></script>
+	<script type="text/javascript">
+                $(document).ready(function() {
+                    // 處理表單點擊事件
+                    var $form = $('#submit');
+                    $form.click(function() {
+                        submit();
+                    });
+                    
+                    function submit() {
+                        var username = $('#username').val();
+                        var email = $('#email2').val();
+                        var password = $('#password2').val();
+                        var phone = $('#phone').val();
+                        var address = $('#address').val();
+                        var account = $('#account').val();
+                        var bid = "000";
+                        var follow = "000";
+                        const fun = 1;//fun=1 register fun=2 login
+
+                        var email_rule = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
+                        var password_rule = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+
+                        if (!email_rule.test(email)) {
+                            alert("Email格式不符！");
+                        }
+                        else if(!password_rule.test(password)) {
+                            alert("密碼格式不符，長度至少8，且至少包含一個數字和英文字母！");
+                        }
+                        else {
+                            // 將資料組成JSON格式
+                            var data_object = {
+                                "name": username,
+                                "email": email,
+                                "password": password,
+                                "phone":phone,
+                                "address":address,
+                                "function":fun,
+                                "account":account,
+                                "follow":follow,
+                                "bid":bid
+                            };
+
+                            // 將JSON格式轉換成字串
+                            var data_string = JSON.stringify(data_object);
+
+                            // 發出POST的AJAX請求
+                            $.ajax({
+                                    type: "POST",
+                                    url: "api/Member2.do",
+                                    data: data_string,
+                                    crossDomain: true,
+                                    cache: false,
+                                    dataType: 'json',
+                                    timeout: 5000,
+                                    success: function (response) {
+                                    	window.location.href = "login.html";
+                                    	$('#flashMessage').html(response.message);
+                                        $('#flashMessage').show();
+                                        if(response.status == 200){
+                                            //updateSQLTable(response.response);
+                                      		
+                                        }
+                                    },
+                                    error: function (e) {
+                                    	console.log(e);
+                                    	alert("無法連線到伺服器！");
+                                        
+                                    }
+                            });
+                        }
+                    }
+                    
+                })
+    </script>
+</body>
+</html>
